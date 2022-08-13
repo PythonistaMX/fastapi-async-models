@@ -1,0 +1,12 @@
+sqlalchemy[asyncio]
+fastapi
+uvicorn
+requests
+pytest
+coverage
+tox
+alembic
+gunicorn
+pg8000
+asyncpg
+aiosqlite
