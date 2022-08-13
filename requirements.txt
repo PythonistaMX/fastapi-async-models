@@ -1,4 +1,4 @@
-sqlalchemy[asyncio]
+sqlalchemy
 fastapi
 uvicorn
 requests
@@ -7,6 +7,5 @@ coverage
 tox
 alembic
 gunicorn
-pg8000
 asyncpg
 aiosqlite

@@ -35,6 +35,11 @@ async def startup_event():
             logging.info(" Ya existen datos en la tabla.") 
 
 
+@app.on_event("shutdown")
+async def shutdown_event():
+    logging.info(" Cerrando la aplicación.")
+
+
 @app.get("/api/", response_model=List[schemas.SchemaAlumno])
 async def vuelca_base():
     alumnos = await crud.consulta_alumnos(db=session())
@@ -55,7 +60,7 @@ async def delete_alumno(cuenta):
     alumno = await crud.consulta_alumno(db=session(), cuenta=cuenta)
     if alumno:
         await crud.baja_alumno(db=session(), alumno=alumno)
-        return {'message':"OK"}
+        return {'message': "OK"}
     else:
         raise HTTPException(status_code=404, detail="Recurso no encontrado")
 
