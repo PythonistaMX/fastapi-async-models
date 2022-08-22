@@ -9,3 +9,7 @@ alembic
 gunicorn
 aiosqlite
 aiomysql
+aiopg
+databases
+anyio
+pytest-asyncio

@@ -10,5 +10,6 @@ if getenv('GAE_ENV') == 'standard':
 else:
     SQLALCHEMY_DATABASE_URL = 'sqlite+aiosqlite:///db.sqlite3'
     '''
-    SQLALCHEMY_DATABASE_URL = f'mysql+aiomysql://{DB_USER}:{DB_PASSWORD}@localhost/pythonista
+    SQLALCHEMY_DTABASE_URL = f'mysql+aiomysql://{DB_USER}:{DB_PASSWORD}@localhost/pythonista
+    SQLALCHEMY_DTABASE_URL = f'postgresql+aiopg://{DB_USER}:{DB_PASSWORD}@localhost/py261-2207'
     '''

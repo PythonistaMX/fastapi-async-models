@@ -1,12 +1,11 @@
 from typing import List
 from fastapi import FastAPI
 from fastapi.exceptions import HTTPException
-from . import crud
-from . import schemas
-from .db import engine, session
-from .models import Base
+from app import crud
+from app import schemas
+from app.db import engine, session
+from app.models import Base
 from data import DATOS_PRUEBA
-from sqlalchemy import func
 import logging
 import settings
 
@@ -26,10 +25,11 @@ async def startup_event():
             logging.info(' La tabla está vacía.')
             logging.info(' Ingresando datos de prueba...')
             for alumno in DATOS_PRUEBA:
-                cuenta = alumno.pop("cuenta")
+                cuenta = alumno["cuenta"]
+                candidato = {campo:alumno[campo] for campo in alumno if campo != "cuenta"}
                 await crud.alta_alumno(db=session(), 
                                  cuenta=cuenta, 
-                                 candidato=alumno)
+                                 candidato=candidato)
             logging.info(' Datos de prueba ingresados.')
         else:
             logging.info(" Ya existen datos en la tabla.") 
@@ -55,7 +55,7 @@ async def get_alumno(cuenta, response_model=schemas.SchemaAlumno):
         raise HTTPException(status_code=404, detail="Recurso no encontrado")
 
        
-@app.delete("/api/{cuenta:int}", status_code=201)
+@app.delete("/api/{cuenta:int}")
 async def delete_alumno(cuenta):
     alumno = await crud.consulta_alumno(db=session(), cuenta=cuenta)
     if alumno:
