@@ -13,3 +13,5 @@ aiopg
 databases
 anyio
 pytest-asyncio
+tox
+tox-venv
